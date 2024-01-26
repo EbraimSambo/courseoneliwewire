@@ -8,4 +8,6 @@
     <ul>
         @foreach ($tasks as $task)
             <li> {{$task}} </li>
-        @endfore
+        @endforeach
+    </ul>
+</div>
