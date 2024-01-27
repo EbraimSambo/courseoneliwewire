@@ -9,7 +9,7 @@
     @endif
         <div class="flex flex-col gap-y-2">
             <label for="title">Titulo</label>
-        <input wire:model.live="form.title" type="text" id="title">
+        <input wire:model="form.title" type="text" id="title">
             @error('form.title')
                 <div class="text-red-500">
                 <span class="text-red-500">{{$message}}</span> 

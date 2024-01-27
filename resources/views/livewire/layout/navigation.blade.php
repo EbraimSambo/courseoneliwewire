@@ -37,7 +37,13 @@ new class extends Component
                     <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')" wire:navigate>
                         {{ __('Tasks') }}
                     </x-nav-link>
+
+                    <div class="">
+                        <livewire:search />
+                    </div>                    
                 </div>
+
+
             </div>
 
             <!-- Settings Dropdown -->
