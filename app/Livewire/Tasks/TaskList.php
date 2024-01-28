@@ -19,6 +19,15 @@ class TaskList extends Component
         return view('skeleton');
     }
 
+    #[Computed(persist: true)]
+    public function tasksByStatus(){
+   
+        return auth()->user()->tasks()->select('stutus', DB::raw('COUNT(*) as count'))
+        ->groupBy('stutus')
+        ->orderBy('stutus','desc')
+        ->get();
+
+    }
     public function changeStatus($id, $stutus){
         $task = Task::find($id);
 
@@ -27,20 +36,20 @@ class TaskList extends Component
         ]);
     }
 
-    #[Computed]
+    #[On('task-created')]
+    public function tasksCreated(){
+        unset($this->tasksByStatus);
+    }
+
+    #[Computed()]
     public function tasks(){
-        return auth()->user()->tasks()->paginate(4);
+        return auth()->user()->tasks()->orderBy('id','desc')->paginate(4);
     }
 
     #[On('task-created')]
     public function render()
     {
-        return view('livewire.tasks.task-list',[
-            'tasksByStatus' => auth()->user()->tasks()->select('stutus', DB::raw('COUNT(*) as count'))
-            ->groupBy('stutus')
-            ->orderBy('stutus','desc')
-            ->get()
-        ]);
+        return view('livewire.tasks.task-list');
     }
 }
 

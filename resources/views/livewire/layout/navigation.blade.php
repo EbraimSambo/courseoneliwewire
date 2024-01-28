@@ -38,6 +38,11 @@ new class extends Component
                         {{ __('Tasks') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('images.index')" :active="request()->routeIs('images.index')" wire:navigate>
+                        {{ __('Imagens') }}
+                    </x-nav-link>
+
+
                     <div class="">
                         <livewire:search />
                     </div>                    
